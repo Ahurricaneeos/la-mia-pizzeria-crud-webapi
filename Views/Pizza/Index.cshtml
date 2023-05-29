@@ -1,0 +1,46 @@
+﻿@model List<PizzaModel>;
+
+<div class="container-fluid text-start m-5">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text mb-3">Pizza, grande amore.</h2>
+            <p>Iniziamo dal primo morso. Ohh, fragrante. E c'è la passata, il sapore del pomodoro e dell'origano così ben accoppiati ti conquistano. Sei innamorato. E poi.. Arriva lei, e ti prende: La bianca signora voluttuosa e lasciva, la mozzarella. E i tondi filamenti di formaggio caldi ti si sciolgono in bocca cullando fra di loro il sugo e la pasta, e senti che in quel momento sei a casa. Con la pizza, sei a casa.</p>
+            <figcaption class="blockquote-footer mt-2">
+                Marshall Eriksen, <cite title="Source Title">How I Met Your Mother</cite>
+            </figcaption>
+        </div>
+    </div>
+</div>
+
+<div class="container justify-content-around">
+    <div class="row">
+
+@{
+    foreach (PizzaModel pizza in Model)
+    {
+        <div class="col-md-6">
+            <div class="card mb-3" style="max-width: 540px; background-color:#FAEBD7">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="@pizza.ImgSource" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">@pizza.Name</h5>
+                            <p class="card-text">@pizza.Description</p>
+                            <span class="card-text"><small class="text-body-secondary">@pizza.Price.ToString() €</small></span>
+                            <a href="@Url.Action("PizzaDetails", "Pizza", new {id = pizza.Id})" type="button" class="btn btn-secondary btn-sm p-1">Comprami!</a>
+                                    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+<div>
+    <a href="@Url.Action("AddPizza", "Pizza")" type="button" class="btn btn-secondary btn-sm p-1">Crea nuova pizza</a>
+</div>
+    </div>
+</div>
