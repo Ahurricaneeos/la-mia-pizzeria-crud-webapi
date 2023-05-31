@@ -44,3 +44,43 @@
 </div>
     </div>
 </div>
+
+
+@section ScriptSection{
+
+                  axios.get("https://localhost:7275/api/PizzaAPI/GetPizza").then((result) => {
+                    const listPizza = result.data;
+
+                    debugger;
+
+                    if(listPizza.length == 0){
+                        document.getElementById("container_no_article").classList.remove("d-none");
+                       // document.getElementById("spinner").classList.add("d-none");
+                    } else {
+                            document.getElementById("container_cards").classList.remove("d-none");
+                          //  document.getElementById("spinner").classList.add("d-none");
+
+                        listPizza.forEach(Pizza => {
+                            document.getElementById("container_cards").innerHTML += `
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="${Pizza.imgsource}" alt="${Pizza.image}">
+        <div class="card-body">
+            <h5 class="card-title">${Pizza.name}</h5>
+            <p class="card-text">${Pizza.description}</p>
+            <p class="card-text">${Pizza.price}</p>
+
+            <a class="btn btn-info btn-sm" href="/Home/Detail/${Pizza.id}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            </a>
+        </div>
+    </div>
+
+				`
+			});
+		}
+    }).catch( (error) => {
+		console.error("Errore!");
+		console.log(error);
+	});
+}
+
